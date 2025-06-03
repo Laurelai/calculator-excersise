@@ -26,17 +26,15 @@ int main(int argc, char **argv)
 		x = y = z = op = 0;		// reset our storage
 		printf("%d> ", line);		// print a REPL prompt to the terminal
                 fgets(buf, 20 - 2, stdin);      // fixed the memory error
-	        sscanf(buf, "%d %c %d", &x, &op, &y); // read the expression from the terminal 
+                int parsed = sscanf(buf, "%d %c %d", &x, &op, &y); // read the expression from the terminal
 
-		// test that the expression is valid
-		if(x < 0 || op == 0 || y < 0)
-                
-                
-		{
-			// try again
-			invalid();
-			continue;
-		}
+                // test that the expression is valid
+                if(parsed != 3 || op == 0)
+                {
+                        // try again
+                        invalid();
+                        continue;
+                }
 
 		// evaluate the expression based on it's infix operator
 		switch(op)
